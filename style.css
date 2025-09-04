@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background-image: url('thegreatfibaquiz.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.main {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100vh;
+    padding: 60px;
+}
+
+
+.cta-section {
+    position: relative;
+    z-index: 10;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+    color: white;
+    border: none;
+    padding: 18px 36px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+    background: linear-gradient(135deg, #FF7A47 0%, #F7A042 100%);
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 20px 24px;
+        gap: 30px;
+    }
+    
+    .main-image {
+        max-height: 60vh;
+    }
+    
+    .cta-button {
+        font-size: 16px;
+        padding: 16px 32px;
+    }
+}
