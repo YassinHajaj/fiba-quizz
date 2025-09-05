@@ -263,6 +263,7 @@ What is the penalty if a player verbally abuses an official?,Technical foul,Pers
 
     showResults() {
         const percentage = (this.score / 10) * 100;
+        const isPerfectScore = this.score === 10;
         let message = '';
         let emoji = '';
         
@@ -280,9 +281,14 @@ What is the penalty if a player verbally abuses an official?,Technical foul,Pers
             emoji = '📚';
         }
         
+        if (isPerfectScore) {
+            message = 'PERFECT SCORE! 🎉 You\'re a true FIBA master!';
+            emoji = '🏆✨';
+        }
+        
         const resultsHTML = `
             <div class="results-container">
-                <div class="results-header">
+                <div class="results-header ${isPerfectScore ? 'perfect-score' : ''}">
                     <div class="results-emoji">${emoji}</div>
                     <h1 class="results-title">Quiz Complete!</h1>
                     <div class="results-score">
@@ -328,6 +334,74 @@ What is the penalty if a player verbally abuses an official?,Technical foul,Pers
         `;
         
         document.querySelector('.main').innerHTML = resultsHTML;
+        
+        // Trigger fireworks for perfect score
+        if (isPerfectScore) {
+            this.createFireworks();
+        }
+    }
+
+    createFireworks() {
+        // Create fireworks container
+        const fireworksContainer = document.createElement('div');
+        fireworksContainer.className = 'fireworks-container';
+        document.body.appendChild(fireworksContainer);
+        
+        // Create multiple fireworks
+        for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * window.innerWidth + 'px';
+                firework.style.animationDelay = Math.random() * 2 + 's';
+                
+                // Random colors
+                const colors = ['#ff6b35', '#f7931e', '#ffd700', '#ff1493', '#00ff00', '#00bfff', '#ff4500', '#32cd32'];
+                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                fireworksContainer.appendChild(firework);
+                
+                // Remove firework after animation
+                setTimeout(() => {
+                    if (firework.parentNode) {
+                        firework.parentNode.removeChild(firework);
+                    }
+                }, 3000);
+            }, i * 300);
+        }
+        
+        // Create confetti
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                
+                // Random shapes and colors
+                const shapes = ['square', 'circle'];
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                if (shape === 'circle') {
+                    confetti.style.borderRadius = '50%';
+                }
+                
+                fireworksContainer.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                }, 4000);
+            }, i * 50);
+        }
+        
+        // Remove fireworks container after all animations
+        setTimeout(() => {
+            if (fireworksContainer.parentNode) {
+                document.body.removeChild(fireworksContainer);
+            }
+        }, 10000);
     }
 }
 
